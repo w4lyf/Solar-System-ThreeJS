@@ -1,5 +1,6 @@
 import * as THREE from 'three';
-import { Planet } from './planet.js';
+import { Planet } from '../Solar-System-ThreeJS_o/planet.js';
+import { setupCameraControls } from './cameraControls.js';
 
 const scene = new THREE.Scene();  // Create a new scene
 const viewSize = Math.min(window.innerWidth, window.innerHeight) * 2 + 4000;
@@ -168,6 +169,7 @@ if (pausePlayBtn) { // Pause/Play Button logic
 }
 
 const clock = new THREE.Clock();
+const updateCameraMovement = setupCameraControls(camera, 10); // Initialize camera controls
 
 // Animation loop
 renderer.setAnimationLoop(() => {
@@ -182,5 +184,6 @@ renderer.setAnimationLoop(() => {
     planetData.object.mesh.rotation.z += planetData.rotationSpeed; 
   });
 
+  updateCameraMovement(); 
   renderer.render(scene, camera);
 });
